@@ -1,0 +1,10 @@
+Comands of terminal for run application
+ 
+pip install pyttsx3
+pip install SpeechRecognition
+pip install Pyaudio
+pip install python-decouple
+pip install datetime
+pip install keyboard
+
+I'm stopped in minute 30

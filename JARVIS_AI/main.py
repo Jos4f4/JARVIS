@@ -1,6 +1,12 @@
+#Orientations
+#Execution first in terminal
+#After, press the buttons ctrl + alt + k for start
+
 import pyttsx3
 import speech_recognition as sr
 import keyboard
+import os
+import subprocess as sp
 
 from datetime import datetime
 from decouple import config
@@ -34,7 +40,16 @@ listening = False
 
 def start_listening():
     global listening
-    listening = True #I'm stopped minute 20
+    listening = True
+    print("started listening ")
+
+def pause_listening():
+    global listening
+    listening = False
+    print("stopped listening")
+
+keyboard.add_hotkey('ctrl+alt+k', start_listening)
+keyboard.add_hotkey('ctrl+alt+p', pause_listening)
 
 def take_command():
     r = sr.Recognizer()
@@ -65,6 +80,35 @@ def take_command():
 if __name__ == '__main__':
     greet_me()
     while True:
-        query = take_command().lower()
-        if "how are you" in query:
-            speak("I am absolutely fine sir. What about you")
+        if listening:
+            query = take_command().lower()
+            if "how are you" in query:
+                speak("I am absolutely fine sir. What about you")
+
+            elif "open command prompt" in query:
+                speak("Opening command prompt")
+                os.system('start cmd')
+
+            elif "open camera" in query:
+                speak("Opening camera sir")
+                sp.run('start microsoft.windows.camera:', shell=True)
+
+            elif "open notepad" in query:
+                speak("Opening Notepad for you sir")
+                notepad_path = "C:\\ProgramData\\ASUS\\AppData\\Local\\Microsoft\\WindowsApps\\notepad.exe"
+                os.startfile(notepad_path)
+
+            elif "open discord" in query:
+                speak("Opening Discord for you sir")
+                discord_path = "C:\\ProgramData\\ASSUS\\Discord\\app-1.0.9028\\discord.exe"
+                os.startfile(discord_path)
+
+            elif "open gta" in query:
+                speak("Opening Gta for you sir")
+                gta_path = "D:\\Tanishq\\GTA\\Launcher.exe"
+                os.startfile(gta_path)
+
+            elif "open armoury crate" in query:
+                speak("Opening armoury crate for you sir")
+                crate_path = "C:\\Program Files\\ASUS\\Armoury CRATE Service\\DenoiseAIPlugin\\ArmouryCrate.DenoiseAI.exe"
+                os.startfile(crate_path)
